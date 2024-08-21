@@ -17,7 +17,7 @@
         "Swap"
     ],
     "logoURI": "https://raw.githubusercontent.com/balancer/pebbles/master/images/pebbles-pad.256w.png",
-    "timestamp": "2024-08-16T07:09:44.315Z",
+    "timestamp": "2024-08-21T09:53:15.821Z",
     "tokens": [
         {
             "chainId": 80084,
@@ -42,140 +42,140 @@
         },
         {
             "chainId": 80084,
-            "address": "0xD78d9E1110CfbCacD00De72a8f56472121a23244",
+            "address": "0x1Bc1A92fcDf8Df49d6E2B62f62a7ccf665c9d9A7",
             "name": "BURR",
             "symbol": "BURR",
             "decimals": 18
         },
         {
             "chainId": 80084,
-            "address": "0xE1bA4190e8a907154A4b7EFe4c5bbF0f584847a7",
+            "address": "0xbd61664A58B4D6D6ed0743E110F381B13AE65830",
             "name": "rUSD",
             "symbol": "rUSD",
             "decimals": 18
         },
         {
             "chainId": 80084,
-            "address": "0xE911bA4d01b64830160284E42BfC9b9933fA19BA",
+            "address": "0xBaDC512c65507cE9775a68Ea7664bc85ed9175f7",
             "name": "brONEY",
             "symbol": "brONEY",
             "decimals": 18
         },
         {
             "chainId": 80084,
-            "address": "0x6859a10034b260b80dfb4755D9AF4811045bb10f",
+            "address": "0xF2C66a18C2730348bE5E35E2bB37D4693D54c8a6",
             "name": "USDI",
             "symbol": "USDI",
             "decimals": 18
         },
         {
             "chainId": 80084,
-            "address": "0xf3ee3CeE5ccaF7a50833592baBb402f488c492Fa",
+            "address": "0x3C27c17BF6C2f9e2d1041c8EEFcaBd9c332AfeE3",
             "name": "shETH",
             "symbol": "shETH",
             "decimals": 18
         },
         {
             "chainId": 80084,
-            "address": "0xF80a29a0D9f856fCfe276646EE93ca728AdF49F5",
+            "address": "0x501Dbf23C2b004D751496ADC073dA3727c5Fe80f",
             "name": "hETH",
             "symbol": "hETH",
             "decimals": 18
         },
         {
             "chainId": 80084,
-            "address": "0x9BB8883CD2A4D5Db824400027ED521D39b0ADC8A",
+            "address": "0x3176d5566350a92EB5f0283a4c137746694f03ee",
             "name": "shSOL",
             "symbol": "shSOL",
             "decimals": 18
         },
         {
             "chainId": 80084,
-            "address": "0x60A8C9a9C3615c624D0d8C3cf6c96300fbCdFc4c",
+            "address": "0x482c38Cd33e79A3E3C1CcE792a72d41BaFFFd416",
             "name": "hSOL",
             "symbol": "hSOL",
             "decimals": 18
         },
         {
             "chainId": 80084,
-            "address": "0x7421F1bAb6d1D82c2f854B464Ecd81e0288F3550",
+            "address": "0x47256DBb5C91917e87a26B2020899256c4E1f1ad",
             "name": "shTIA",
             "symbol": "shTIA",
             "decimals": 18
         },
         {
             "chainId": 80084,
-            "address": "0x2c66D4a60F9dEcDDAb32856E2E50dd50926438E2",
+            "address": "0x3dB20AEfcd234465C981B87Da025711c91aDD2C3",
             "name": "hTIA",
             "symbol": "hTIA",
             "decimals": 18
         },
         {
             "chainId": 80084,
-            "address": "0xA34f8931F4bfB338388d57eD4b64135E86f2eDf5",
+            "address": "0x754eB4aD14c640Bb724835893A0369C229A367C5",
             "name": "shATOM",
             "symbol": "shATOM",
             "decimals": 18
         },
         {
             "chainId": 80084,
-            "address": "0x00EE7F1020BBC5423a25Ec5F5a08139a17d12344",
+            "address": "0xf3d9E78c6801bD51e27786D0314B53AE72e9a54F",
             "name": "hATOM",
             "symbol": "hATOM",
             "decimals": 18
         },
         {
             "chainId": 80084,
-            "address": "0x5be694b0fd7B42C2f58c9CaBe78B33624Dfcd4FD",
+            "address": "0x671423849d625Fb747648bAB2C06616848F24b36",
             "name": "shDYM",
             "symbol": "shDYM",
             "decimals": 18
         },
         {
             "chainId": 80084,
-            "address": "0x317a2Aec6ee9474945b1A8E08E0183060721198C",
+            "address": "0xcbBC216ad0EfA800edDC507Ba7E41E42CDbaFf3D",
             "name": "hDYM",
             "symbol": "hDYM",
             "decimals": 18
         },
         {
             "chainId": 80084,
-            "address": "0x8a99db626a76ac5a2eFeD3790FB791E0eD9aFB00",
+            "address": "0xeDA2EFd201b3EB6aC192f6cF6fE31AfadA442dD8",
             "name": "shDYDX",
             "symbol": "shDYDX",
             "decimals": 18
         },
         {
             "chainId": 80084,
-            "address": "0x48Ccf2bCAD907008f99a779CF79E24Bb2c6c5a09",
+            "address": "0x9f8cf869a96635B79A0cc56E90C0D55774daef56",
             "name": "hDYDX",
             "symbol": "hDYDX",
             "decimals": 18
         },
         {
             "chainId": 80084,
-            "address": "0xf734598152418F97a1E03aD447a490792f82489F",
+            "address": "0xd7C07a9307B2Fb659D528F88e4a3333dFc85982f",
             "name": "shINJ",
             "symbol": "shINJ",
             "decimals": 18
         },
         {
             "chainId": 80084,
-            "address": "0x4E71FaE1eEE27d442c50C12B3Ba52203564a0801",
+            "address": "0xA7B3E17642115948556E95e9074d3ED3eAC5A5D3",
             "name": "hINJ",
             "symbol": "hINJ",
             "decimals": 18
         },
         {
             "chainId": 80084,
-            "address": "0x60DD2eF7aE2380eF0aa685072D199ebd060124EB",
+            "address": "0x6655c127BF795F551a84aAC49C6E02228588a693",
             "name": "shOSMO",
             "symbol": "shOSMO",
             "decimals": 18
         },
         {
             "chainId": 80084,
-            "address": "0x9FDc4881Ce3eE888A7D3162A8AccFB3875437B34",
+            "address": "0xEc1F1E17bA13a2f67CDD60DAdDbDf810E337087a",
             "name": "hOSMO",
             "symbol": "hOSMO",
             "decimals": 18
