@@ -62,6 +62,8 @@ jobs:
           npm run generate
         env:
           NODE_ENV: production
+          INFURA_KEY: ${{ secrets.INFURA_KEY }}
+          ALCHEMY_KEY: ${{ secrets.ALCHEMY_KEY }}
 
       - name: Check for changes
         id: check-changes
