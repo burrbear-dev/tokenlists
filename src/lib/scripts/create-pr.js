@@ -3,7 +3,49 @@
 const commander = require('commander')
 const chalk = require('chalk')
 const fs = require('fs-extra')
+const path = require('path')
 const { execSync } = require('child_process')
+
+// Load environment variables from .env file if it exists
+function loadEnvFile() {
+  try {
+    const envPath = path.resolve(process.cwd(), '.env')
+    if (fs.existsSync(envPath)) {
+      const envContent = fs.readFileSync(envPath, 'utf8')
+      const envVars = envContent
+        .split('\n')
+        .filter((line) => line.trim() && !line.startsWith('#'))
+        .map((line) => {
+          const [key, ...valueParts] = line.split('=')
+          const value = valueParts.join('=').trim()
+          return { key: key.trim(), value: value.replace(/^["']|["']$/g, '') }
+        })
+
+      envVars.forEach(({ key, value }) => {
+        if (!process.env[key]) {
+          process.env[key] = value
+        }
+      })
+
+      console.log(
+        chalk.blue(
+          `[${new Date().toISOString()}] Loaded environment variables from .env file`
+        )
+      )
+    }
+  } catch (error) {
+    console.log(
+      chalk.yellow(
+        `[${new Date().toISOString()}] Warning: Could not load .env file: ${
+          error.message
+        }`
+      )
+    )
+  }
+}
+
+// Load .env file when running locally
+loadEnvFile()
 
 // Configuration
 const CONFIG = {
