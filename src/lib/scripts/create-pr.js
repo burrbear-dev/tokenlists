@@ -339,10 +339,22 @@ function analyzeChanges() {
       stats.newTokens = addresses.length
     }
 
-    // Check for new logo files
-    if (fs.existsSync(CONFIG.ASSETS_DIR)) {
-      const files = fs.readdirSync(CONFIG.ASSETS_DIR)
-      stats.newLogos = files.length
+    // Check for new logo files by counting only the newly added files
+    try {
+      const result = execSync('git diff --cached --name-only --diff-filter=A', {
+        encoding: 'utf8',
+      })
+      const newFiles = result
+        .trim()
+        .split('\n')
+        .filter((file) => file.startsWith(CONFIG.ASSETS_DIR))
+      stats.newLogos = newFiles.length
+    } catch (error) {
+      // Fallback: count all files in directory if git command fails
+      if (fs.existsSync(CONFIG.ASSETS_DIR)) {
+        const files = fs.readdirSync(CONFIG.ASSETS_DIR)
+        stats.newLogos = files.length
+      }
     }
 
     log(`Analysis: ${stats.newTokens} tokens, ${stats.newLogos} logo files`)
