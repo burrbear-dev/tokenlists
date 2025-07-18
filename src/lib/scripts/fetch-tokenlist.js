@@ -9,9 +9,12 @@ const { execSync } = require('child_process')
 // Configuration
 const CONFIG = {
   SOURCE_URL:
+    process.env.SOURCE_URL ||
     'https://raw.githubusercontent.com/burrbear-dev/default-lists/main/src/tokens/mainnet/defaultTokenList.json',
-  TARGET_TOKEN_FILE: 'src/tokenlists/balancer/tokens/berachain.ts',
-  ASSETS_DIR: 'src/assets/images/tokens',
+  TARGET_TOKEN_FILE:
+    process.env.TARGET_TOKEN_FILE ||
+    'src/tokenlists/balancer/tokens/berachain.ts',
+  ASSETS_DIR: process.env.ASSETS_DIR || 'src/assets/images/tokens',
   LOG_FILE: `fetch-tokenlist-${new Date()
     .toISOString()
     .replace(/[:.]/g, '-')

@@ -12,24 +12,16 @@ async function init() {
   const program = new commander.Command()
     .version(pkgJson.version)
     .name('npm run tokenlist:create')
-    .arguments('<tokenlist-name>')
-    .usage(`${chalk.green('<tokenlist-name>')} [options]`)
+    .arguments('[tokenlist-name]')
+    .usage(`${chalk.green('[tokenlist-name]')} [options]`)
     .action((name) => {
       tokenlistName = name
     })
     .parse(process.argv)
 
+  // Use environment variable or default to 'balancer'
   if (typeof tokenlistName === 'undefined') {
-    console.error('Please specify the tokenlist name:')
-    console.log(
-      `  ${chalk.cyan(program.name())} ${chalk.green('<tokenlist-name>')}`
-    )
-    console.log()
-    console.log('For example:')
-    console.log(
-      `  ${chalk.cyan(program.name())} ${chalk.green('my-new-tokenlist')}`
-    )
-    process.exit(1)
+    tokenlistName = process.env.TOKENLIST_NAME || 'balancer'
   }
 
   await createTokenlist(tokenlistName)
