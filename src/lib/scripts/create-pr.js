@@ -220,14 +220,14 @@ function getRepositoryInfo() {
         // SSH format: [host, owner, repo]
         const [, host, owner, repo] = repoMatch
         log(`Parsed SSH URL: ${owner}/${repo} on ${host}`)
-        return { owner, repo, host }
+        return { owner, repo }
       }
     }
 
     if (repoMatch) {
       const [, owner, repo] = repoMatch
       log(`Parsed HTTPS URL: ${owner}/${repo}`)
-      return { owner, repo, host: 'github.com' }
+      return { owner, repo }
     }
 
     log('Could not parse repository information from git remote.', 'error')
@@ -269,8 +269,9 @@ function pushAndCreatePR(branchName) {
       return false
     }
 
-    const { owner, repo, host = 'github.com' } = repoInfo
-    const apiUrl = `https://api.${host}/repos/${owner}/${repo}/pulls`
+    const { owner, repo } = repoInfo
+    // Always use api.github.com for API calls, regardless of SSH host
+    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/pulls`
 
     const prTitle = `feat: Update token list and assets - ${new Date().toLocaleDateString()}`
     const prBody = `## Token List Update
@@ -425,13 +426,19 @@ function printSummary() {
     console.log(`Changes detected: ${chalk.green('Yes')}`)
     console.log(`New tokens: ${chalk.blue(stats.newTokens)}`)
     console.log(`New logos: ${chalk.blue(stats.newLogos)}`)
-    console.log(
-      `PR created: ${
-        stats.prCreated
-          ? chalk.green('Yes')
-          : chalk.yellow('No - GITHUB_TOKEN not set')
-      }`
-    )
+    if (stats.prCreated) {
+      console.log(`PR created: ${chalk.green('Yes')}`)
+    } else {
+      const hasErrors = stats.errors.length > 0
+      const hasToken = process.env.GITHUB_TOKEN
+      if (!hasToken) {
+        console.log(`PR created: ${chalk.yellow('No - GITHUB_TOKEN not set')}`)
+      } else if (hasErrors) {
+        console.log(`PR created: ${chalk.yellow('No - API error occurred')}`)
+      } else {
+        console.log(`PR created: ${chalk.yellow('No - Unknown error')}`)
+      }
+    }
   } else {
     console.log(`Changes detected: ${chalk.yellow('No')}`)
     console.log('No changes to commit')
