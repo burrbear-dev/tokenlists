@@ -12,11 +12,11 @@ const CONFIG = {
     'https://raw.githubusercontent.com/burrbear-dev/default-lists/main/src/tokens/mainnet/defaultTokenList.json',
   TARGET_TOKEN_FILE: 'src/tokenlists/balancer/tokens/berachain.ts',
   ASSETS_DIR: 'src/assets/images/tokens',
-  LOG_FILE: 'fetch-tokenlist.log',
+  LOG_FILE: `fetch-tokenlist-${new Date()
+    .toISOString()
+    .replace(/[:.]/g, '-')
+    .slice(0, 19)}.log`,
 }
-
-// GitHub authentication
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN
 
 // Statistics tracking
 const stats = {
@@ -42,14 +42,6 @@ function curlGet(url, options = {}) {
       '--retry-delay',
       '2', // wait 2 seconds between retries
     ]
-
-    // Add GitHub authentication if token is provided
-    if (
-      GITHUB_TOKEN &&
-      (url.includes('github.com') || url.includes('raw.githubusercontent.com'))
-    ) {
-      curlOptions.push('-H', `Authorization: token ${GITHUB_TOKEN}`)
-    }
 
     if (options.output) {
       curlOptions.push('-o', options.output)
@@ -213,9 +205,15 @@ async function updateTokenList(tokenAddresses) {
       .map((addr) => `  '${addr}'`)
       .join(',\n')}\n]`
 
-    // Backup original file
+    // Backup original file BEFORE any changes
     if (fs.existsSync(targetFile)) {
-      fs.copyFileSync(targetFile, `${targetFile}.backup`)
+      const timestamp = new Date()
+        .toISOString()
+        .replace(/[:.]/g, '-')
+        .slice(0, 19)
+      const backupFile = `${targetFile}.backup-${timestamp}`
+      fs.copyFileSync(targetFile, backupFile)
+      log(`Backup created: ${path.basename(backupFile)}`)
     }
 
     // Write new content
@@ -231,6 +229,56 @@ async function updateTokenList(tokenAddresses) {
 }
 
 /**
+ * Download logo assets using curl with better path handling
+ */
+async function downloadAssets(tokens) {
+  log('Starting asset downloads using curl...')
+
+  // Ensure assets directory exists
+  fs.ensureDirSync(path.resolve(CONFIG.ASSETS_DIR))
+
+  for (const token of tokens) {
+    if (!token.logoURI) {
+      log(`Token ${token.symbol || token.address} missing logoURI`, 'warning')
+      continue
+    }
+
+    // Extract file extension from original URL
+    const originalFilename = extractFilenameFromUrl(token.logoURI)
+    if (!originalFilename) {
+      log(`Could not extract filename from URL: ${token.logoURI}`, 'warning')
+      continue
+    }
+
+    // Get file extension from original filename
+    const fileExtension = path.extname(originalFilename)
+
+    // Use token address as filename with original extension
+    const filename = `${token.address}${fileExtension}`
+    const targetPath = path.resolve(CONFIG.ASSETS_DIR, filename)
+
+    // Skip if file already exists
+    if (fs.existsSync(targetPath)) {
+      log(`Skipping existing file: ${filename}`)
+      stats.skippedDownloads++
+      continue
+    }
+
+    try {
+      // Use curl with proper path escaping
+      const curlCommand = `curl -s -L --max-time 30 --retry 3 --retry-delay 2 -o "${targetPath}" "${token.logoURI}"`
+      execSync(curlCommand, { shell: true })
+
+      log(`Downloaded: ${originalFilename} -> ${filename}`)
+      stats.successfulDownloads++
+    } catch (error) {
+      log(`Failed to download ${filename}: ${error.message}`, 'error')
+      stats.failedDownloads++
+    }
+  }
+}
+
+/**
  * Print summary report
  */
 function printSummary() {
@@ -238,6 +286,9 @@ function printSummary() {
   console.log(chalk.cyan('FETCH TOKENLIST SUMMARY'))
   console.log('='.repeat(50))
   console.log(`Total tokens processed: ${stats.totalTokens}`)
+  console.log(`Successful downloads: ${chalk.green(stats.successfulDownloads)}`)
+  console.log(`Failed downloads: ${chalk.red(stats.failedDownloads)}`)
+  console.log(`Skipped downloads: ${chalk.yellow(stats.skippedDownloads)}`)
   console.log(`Token list updated successfully!`)
 
   if (stats.errors.length > 0) {
@@ -255,14 +306,6 @@ function printSummary() {
 async function integrateTokenList() {
   log('Starting token list integration workflow...')
 
-  // Check for GitHub token
-  if (!GITHUB_TOKEN) {
-    log(
-      'Warning: No GITHUB_TOKEN provided. This may fail if the repository is private.',
-      'warning'
-    )
-  }
-
   try {
     // Clear log file
     fs.writeFileSync(CONFIG.LOG_FILE, '')
@@ -276,7 +319,10 @@ async function integrateTokenList() {
     // Step 3: Update token list file
     await updateTokenList(tokenAddresses)
 
-    // Step 4: Print summary
+    // Step 4: Download logo assets
+    await downloadAssets(validTokens)
+
+    // Step 5: Print summary
     printSummary()
 
     log('Token list integration completed successfully!', 'success')
