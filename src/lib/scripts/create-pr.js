@@ -18,7 +18,9 @@ function loadEnvFile() {
         .map((line) => {
           const [key, ...valueParts] = line.split('=')
           const value = valueParts.join('=').trim()
-          return { key: key.trim(), value: value.replace(/^["']|["']$/g, '') }
+          // Remove quotes from the beginning and end only
+          const cleanValue = value.replace(/^["']|["']$/g, '')
+          return { key: key.trim(), value: cleanValue }
         })
 
       envVars.forEach(({ key, value }) => {

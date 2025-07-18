@@ -1,3 +1,12 @@
 [2025-07-18T08:24:19.506Z] Changes detected, proceeding with PR creation...
 [2025-07-18T08:24:19.507Z] Analysis: 66 tokens, 1069 logo files
 [2025-07-18T08:24:19.561Z] Created new branch: feat/tokenlist-update-2025-07-18T08-24-19
+[2025-07-18T08:24:19.820Z] Changes committed successfully
+[2025-07-18T08:24:23.304Z] Pushed branch feat/tokenlist-update-2025-07-18T08-24-19 to remote
+[2025-07-18T08:24:23.827Z] Failed to create PR: {
+  "message": "Bad credentials",
+  "documentation_url": "https://docs.github.com/rest",
+  "status": "401"
+}
+
+[2025-07-18T08:24:23.829Z] PR creation workflow completed with warnings
