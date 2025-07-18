@@ -5,6 +5,7 @@
   "scripts": {
     "generate": "ts-node src/generator.ts",
     "tokenlist:create": "node src/lib/scripts/create-tokenlist.js",
+    "tokenlist:fetch": "node src/lib/scripts/fetch-tokenlist.js",
     "lint": "eslint . --ext .js,.ts --max-warnings 0",
     "lint:fix": "npm run lint -- --fix",
     "test": "vitest run",
