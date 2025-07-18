@@ -1,24 +1,12 @@
 #! /usr/bin/env node
 /* eslint-disable @typescript-eslint/no-var-requires */
-const commander = require('commander')
 const chalk = require('chalk')
-const pkgJson = require('../../../package.json')
 const path = require('path')
 const fs = require('fs-extra')
 
 let tokenlistName
 
 async function init() {
-  const program = new commander.Command()
-    .version(pkgJson.version)
-    .name('npm run tokenlist:create')
-    .arguments('[tokenlist-name]')
-    .usage(`${chalk.green('[tokenlist-name]')} [options]`)
-    .action((name) => {
-      tokenlistName = name
-    })
-    .parse(process.argv)
-
   // Use environment variable or default to 'balancer'
   if (typeof tokenlistName === 'undefined') {
     tokenlistName = process.env.TOKENLIST_NAME || 'balancer'

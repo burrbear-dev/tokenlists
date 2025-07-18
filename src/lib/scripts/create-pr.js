@@ -139,18 +139,6 @@ function hasChanges() {
 }
 
 /**
- * Get current branch name
- */
-function getCurrentBranch() {
-  try {
-    return execSync('git branch --show-current', { encoding: 'utf8' }).trim()
-  } catch (error) {
-    log(`Failed to get current branch: ${error.message}`, 'error')
-    return null
-  }
-}
-
-/**
  * Create a new branch with timestamp
  */
 function createNewBranch() {
@@ -230,7 +218,7 @@ function getRepositoryInfo() {
       repoMatch = remoteUrl.match(/git@([^:]+):([^/]+)\/([^/]+?)(?:\.git)?$/)
       if (repoMatch) {
         // SSH format: [host, owner, repo]
-        const [, host, owner, repo] = repoMatch
+        const [, owner, repo] = repoMatch
         log(`Parsed SSH URL: ${owner}/${repo}`)
         return { owner, repo }
       }
