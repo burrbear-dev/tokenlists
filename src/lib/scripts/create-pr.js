@@ -396,12 +396,22 @@ async function createPRWorkflow() {
       throw new Error('Failed to create new branch')
     }
 
-    // Step 4: Commit changes
+    // Step 4: Run lint:fix
+    log('Running lint:fix...')
+    try {
+      execSync('npm run lint:fix', { stdio: 'inherit' })
+      log('Lint:fix completed successfully')
+    } catch (error) {
+      log(`Lint:fix failed: ${error.message}`, 'warning')
+      log('Continuing with PR creation...')
+    }
+
+    // Step 5: Commit changes
     if (!commitChanges()) {
       throw new Error('Failed to commit changes')
     }
 
-    // Step 5: Push and create PR
+    // Step 6: Push and create PR
     if (!pushAndCreatePR(branchName)) {
       log('PR creation workflow completed with warnings', 'warning')
       return
