@@ -56,14 +56,10 @@ jobs:
         env:
           NODE_ENV: production
 
-      - name: Create token list
+      - name: Generate token list
         run: |
-          # Set environment variables for the script
-          export TARGET_TOKEN_FILE="${{ inputs.target_token_file }}"
-          export ASSETS_DIR="${{ inputs.assets_dir }}"
-
-          # Run the create script
-          npm run tokenlist:create
+          # Run the generate script
+          npm run generate
         env:
           NODE_ENV: production
 
