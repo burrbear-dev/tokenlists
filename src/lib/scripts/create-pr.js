@@ -218,16 +218,16 @@ function getRepositoryInfo() {
       repoMatch = remoteUrl.match(/git@([^:]+):([^/]+)\/([^/]+?)(?:\.git)?$/)
       if (repoMatch) {
         // SSH format: [host, owner, repo]
-        const [, owner, repo] = repoMatch
-        log(`Parsed SSH URL: ${owner}/${repo}`)
-        return { owner, repo }
+        const [, host, owner, repo] = repoMatch
+        log(`Parsed SSH URL: ${owner}/${repo} on ${host}`)
+        return { owner, repo, host }
       }
     }
 
     if (repoMatch) {
       const [, owner, repo] = repoMatch
       log(`Parsed HTTPS URL: ${owner}/${repo}`)
-      return { owner, repo }
+      return { owner, repo, host: 'github.com' }
     }
 
     log('Could not parse repository information from git remote.', 'error')
@@ -269,8 +269,8 @@ function pushAndCreatePR(branchName) {
       return false
     }
 
-    const { owner, repo } = repoInfo
-    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/pulls`
+    const { owner, repo, host = 'github.com' } = repoInfo
+    const apiUrl = `https://api.${host}/repos/${owner}/${repo}/pulls`
 
     const prTitle = `feat: Update token list and assets - ${new Date().toLocaleDateString()}`
     const prBody = `## Token List Update
@@ -341,7 +341,8 @@ function analyzeChanges() {
 
     // Check for new logo files by counting only the newly added files
     try {
-      const result = execSync('git diff --cached --name-only --diff-filter=A', {
+      // Use git diff to get files that were added in the last commit
+      const result = execSync('git diff HEAD~1 --name-only --diff-filter=A', {
         encoding: 'utf8',
       })
       const newFiles = result

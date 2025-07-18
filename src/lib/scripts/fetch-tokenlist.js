@@ -222,8 +222,9 @@ async function updateTokenList(tokenAddresses) {
     // Write new content
     fs.writeFileSync(targetFile, newContent)
 
+    const newAddresses = allAddresses.length - existingAddresses.length
     log(
-      `Successfully updated token list with ${allAddresses.length} addresses (${existingAddresses.length} existing + ${tokenAddresses.length} new)`
+      `Successfully updated token list with ${allAddresses.length} addresses (${existingAddresses.length} existing + ${newAddresses} new)`
     )
   } catch (error) {
     log(`Failed to update token list: ${error.message}`, 'error')
