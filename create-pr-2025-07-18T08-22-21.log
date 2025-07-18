@@ -1,3 +1,7 @@
 [2025-07-18T08:22:21.825Z] Changes detected, proceeding with PR creation...
 [2025-07-18T08:22:21.826Z] Analysis: 66 tokens, 1069 logo files
 [2025-07-18T08:22:21.840Z] Created new branch: feat/tokenlist-update-2025-07-18T08-22-21
+[2025-07-18T08:22:21.933Z] Changes committed successfully
+[2025-07-18T08:22:26.878Z] Pushed branch feat/tokenlist-update-2025-07-18T08-22-21 to remote
+[2025-07-18T08:22:26.900Z] Could not parse repository information from git remote.
+[2025-07-18T08:22:26.900Z] PR creation workflow completed with warnings

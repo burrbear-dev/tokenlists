@@ -194,9 +194,20 @@ function pushAndCreatePR(branchName) {
       const remoteUrl = execSync('git config --get remote.origin.url', {
         encoding: 'utf8',
       }).trim()
-      const repoMatch = remoteUrl.match(
+      // Handle both SSH and HTTPS formats
+      let repoMatch = remoteUrl.match(
         /github\.com[:/]([^/]+)\/([^/]+?)(?:\.git)?$/
       )
+
+      // If no match, try SSH format (git@host:owner/repo.git)
+      if (!repoMatch) {
+        repoMatch = remoteUrl.match(/git@([^:]+):([^/]+)\/([^/]+?)(?:\.git)?$/)
+        if (repoMatch) {
+          // SSH format: [host, owner, repo]
+          const [, host, owner, repo] = repoMatch
+          repoMatch = [null, owner, repo] // Convert to same format as HTTPS
+        }
+      }
 
       if (!repoMatch) {
         log('Could not parse repository information from git remote.', 'error')
