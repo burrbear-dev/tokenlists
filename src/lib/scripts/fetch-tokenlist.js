@@ -256,8 +256,8 @@ async function downloadAssets(tokens) {
     // Get file extension from original filename
     const fileExtension = path.extname(originalFilename)
 
-    // Use token address as filename with original extension
-    const filename = `${token.address}${fileExtension}`
+    // Use token address as filename with original extension (lowercase)
+    const filename = `${token.address.toLowerCase()}${fileExtension}`
     const targetPath = path.resolve(CONFIG.ASSETS_DIR, filename)
 
     // Skip if file already exists
