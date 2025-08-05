@@ -3,3 +3,8 @@ dist
 .DS_Store
 .env
 .idea/**
+
+
+
+*.backup*
+fetch-tokenlist*.log
