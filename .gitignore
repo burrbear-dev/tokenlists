@@ -4,7 +4,6 @@ dist
 .env
 .idea/**
 
-
-
-*.backup*
+# Tokenlist scripts output
+*ts.backup*
 fetch-tokenlist*.log
