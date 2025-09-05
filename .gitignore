@@ -3,3 +3,7 @@ dist
 .DS_Store
 .env
 .idea/**
+
+# Tokenlist scripts output
+*ts.backup*
+fetch-tokenlist*.log
