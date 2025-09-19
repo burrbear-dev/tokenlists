@@ -3,7 +3,7 @@
     "version": {
         "major": 1,
         "minor": 0,
-        "patch": 369
+        "patch": 370
     },
     "keywords": [
         "Balancer",
@@ -17,7 +17,7 @@
         "Swap"
     ],
     "logoURI": "https://raw.githubusercontent.com/balancer/pebbles/master/images/pebbles-pad.256w.png",
-    "timestamp": "2025-09-10T08:08:38.111Z",
+    "timestamp": "2025-09-19T02:07:48.054Z",
     "tokens": [
         {
             "chainId": 999,
@@ -1026,6 +1026,38 @@
             "symbol": "USDp",
             "decimals": 18,
             "logoURI": "https://raw.githubusercontent.com/parallel-protocol/parallel-brand-kit/main/Tokens/USDp/USDp.svg"
+        },
+        {
+            "chainId": 80094,
+            "address": "0x6b024955Bcc8fb61b39d911B947e9d82dAa5A555",
+            "name": "BitMine Immersion Technologies, Inc Tokenized by Sailing",
+            "symbol": "BMNRs",
+            "decimals": 18,
+            "logoURI": "https://raw.githubusercontent.com/burrbear-dev/tokenlists/main/src/assets/images/tokens/0x6b024955bcc8fb61b39d911b947e9d82daa5a555.svg"
+        },
+        {
+            "chainId": 80094,
+            "address": "0x00E0dA3a1EEE268ED21f6F35e802B51C9fD0C033",
+            "name": "SharpLink Gaming, Inc Tokenized by Sailing",
+            "symbol": "SBETs",
+            "decimals": 18,
+            "logoURI": "https://raw.githubusercontent.com/burrbear-dev/tokenlists/main/src/assets/images/tokens/0x00e0da3a1eee268ed21f6f35e802b51c9fd0c033.svg"
+        },
+        {
+            "chainId": 80094,
+            "address": "0xCdc98326a9328A340CEe87C0708110A229C707Dd",
+            "name": "Vista Energy, S.A.B. de C.V. Tokenized by Sailing",
+            "symbol": "VISTs",
+            "decimals": 18,
+            "logoURI": "https://raw.githubusercontent.com/burrbear-dev/tokenlists/main/src/assets/images/tokens/0xcdc98326a9328a340cee87c0708110a229c707dd.svg"
+        },
+        {
+            "chainId": 80094,
+            "address": "0x4c836c1B5aF0Ea2eDe290C22603391DAad7F7ce5",
+            "name": "Rivian Automotive, Inc. Tokenized by Sailing",
+            "symbol": "RIVNs",
+            "decimals": 18,
+            "logoURI": "https://raw.githubusercontent.com/burrbear-dev/tokenlists/main/src/assets/images/tokens/0x4c836c1b5af0ea2ede290c22603391daad7f7ce5.svg"
         }
     ]
 }
